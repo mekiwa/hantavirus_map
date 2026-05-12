@@ -1,0 +1,133 @@
+body{margin:0;background:#0b1120;color:#e5e7eb;font-family:Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:#111827;border-bottom:1px solid #334155}
+header h1{margin:0 0 6px;font-size:26px}
+header p{margin:0;color:#9ca3af}
+main{display:grid;grid-template-columns:360px 1fr;min-height:720px}
+aside{background:#111827;padding:18px;border-right:1px solid #334155}
+label{display:block;margin:12px 0;color:#9ca3af}
+select,input,button{width:100%;box-sizing:border-box;margin-top:6px;padding:11px;border-radius:10px;border:1px solid #334155;background:#1f2937;color:#e5e7eb}
+button{background:#2563eb;border:0;font-weight:bold;cursor:pointer}
+#map{min-height:720px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.stats div{background:#1f2937;border:1px solid #334155;border-radius:12px;padding:12px;text-align:center}
+.stats span{display:block;font-size:24px;font-weight:bold}
+.stats small{color:#9ca3af}
+section{background:#1f2937;border:1px solid #334155;border-radius:12px;padding:12px;margin-top:14px}
+section p{color:#9ca3af;line-height:1.45}
+.tableBox{margin:0;padding:22px;border-radius:0;border-left:0;border-right:0}
+table{width:100%;border-collapse:collapse;background:#111827}
+th,td{padding:11px;border-bottom:1px solid #334155;text-align:left;vertical-align:top}
+th{color:#fff}
+td{color:#cbd5e1}
+a{color:#93c5fd}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#334155}
+.official{background:#1d4ed8}
+.signal{background:#c2410c}
+@media(max-width:900px){main{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #334155}}
+
+/* ===== Mobile polish ===== */
+
+@media (max-width: 900px) {
+  body {
+    font-size: 15px;
+  }
+
+  header {
+    padding: 14px 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  header h1 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  header p {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  main {
+    display: block;
+    min-height: auto;
+  }
+
+  aside {
+    position: relative;
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid #334155;
+    padding: 14px;
+  }
+
+  aside h2 {
+    margin-top: 0;
+    font-size: 20px;
+  }
+
+  label {
+    margin: 10px 0;
+  }
+
+  select,
+  input,
+  button {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stats div {
+    padding: 10px;
+  }
+
+  .stats span {
+    font-size: 22px;
+  }
+
+  #map {
+    height: 70vh;
+    min-height: 460px;
+  }
+
+  .tableBox {
+    padding: 14px;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 850px;
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 9px 10px;
+  }
+
+  .leaflet-popup-content {
+    max-width: 260px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 20px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  #map {
+    height: 68vh;
+    min-height: 420px;
+  }
+}

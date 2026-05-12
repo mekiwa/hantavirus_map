@@ -1,0 +1,43 @@
+name: Update confirmed hantavirus data
+
+on:
+  schedule:
+    - cron: "15 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update official confirmed data
+        run: python tools/update_official_confirmed.py
+
+      - name: Update ArcGIS signal data
+        run: |
+          if [ -f tools/update_arcgis_signal.py ]; then
+            python tools/update_arcgis_signal.py || true
+          fi
+
+      - name: Build site data
+        run: python tools/build_site_data.py
+
+      - name: Validate data
+        run: python tools/validate_data.py
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update hantavirus data"
+          file_pattern: "data/*.json"

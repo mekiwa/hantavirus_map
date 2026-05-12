@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Hantavirus Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Онлайн-карта хантавируса</h1>
+    <p>Официальные источники отдельно, ArcGIS и похожие трекеры отдельно как signal</p>
+  </div>
+  <b>v2</b>
+</header>
+
+<main>
+  <aside>
+    <h2>Фильтры</h2>
+
+    <label>Регион
+      <select id="groupFilter">
+        <option value="all">Весь мир</option>
+        <option value="Europe">Европа</option>
+        <option value="Russia">Россия</option>
+        <option value="USA">США</option>
+        <option value="Multi-country">Мульти-страна</option>
+      </select>
+    </label>
+
+    <label>Источник
+      <select id="tierFilter">
+        <option value="all">Все</option>
+        <option value="official">Официальные</option>
+        <option value="signal">Сигнальные / ArcGIS</option>
+      </select>
+    </label>
+
+    <label>Статус
+      <select id="statusFilter">
+        <option value="all">Все</option>
+        <option value="official_total">Официальная сводка</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="probable">Probable</option>
+        <option value="suspected">Suspected</option>
+        <option value="deceased">Deceased</option>
+        <option value="monitoring">Monitoring</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </label>
+
+    <label>Год
+      <select id="yearFilter">
+        <option value="all">Все годы</option>
+      </select>
+    </label>
+
+    <label>Поиск
+      <input id="searchInput" placeholder="страна, регион, источник">
+    </label>
+
+    <div class="stats">
+      <div><span id="recordsCount">0</span><small>записей</small></div>
+      <div><span id="officialCount">0</span><small>official</small></div>
+      <div><span id="signalCount">0</span><small>signal</small></div>
+      <div><span id="deathCount">0</span><small>смертей official</small></div>
+    </div>
+
+    <button id="resetBtn">Сбросить</button>
+
+    <section>
+      <h3>Важно</h3>
+      <p><b>Signal</b> не считается официальной статистикой. Monitoring и suspected не складываются с confirmed, потому что мы не совсем безумцы.</p>
+    </section>
+  </aside>
+
+  <div id="map"></div>
+</main>
+
+<section class="tableBox">
+  <h2>Данные</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Год</th><th>Tier</th><th>Статус</th><th>Страна / регион</th><th>Случаи</th><th>Смерти</th><th>Источник</th>
+      </tr>
+    </thead>
+    <tbody id="dataTable"></tbody>
+  </table>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
