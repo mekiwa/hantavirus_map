@@ -162,6 +162,7 @@ def parse_ecdc():
     confirmed = num_after("Confirmed cases", text)
     probable = num_after("Probable cases", text)
     suspected = num_after("Suspected cases", text)
+    inconclusive = num_after("Inconclusive cases", text)
     deaths = num_after("Number of deaths", text)
 
     total = None
@@ -179,11 +180,11 @@ def parse_ecdc():
             break
 
     if total is None and confirmed is not None and probable is not None:
-        total = confirmed + probable
+        total = confirmed + probable + (inconclusive or 0)
 
     if confirmed is None or probable is None or deaths is None or total is None:
         raise RuntimeError(
-            f"ECDC parse failed: total={total}, confirmed={confirmed}, probable={probable}, suspected={suspected}, deaths={deaths}"
+            f"ECDC parse failed: total={total}, confirmed={confirmed}, probable={probable}, inconclusive={inconclusive}, suspected={suspected}, deaths={deaths}"
         )
 
     date = datetime.now(timezone.utc).date().isoformat()
@@ -208,6 +209,7 @@ def parse_ecdc():
         "confirmed_cases": confirmed,
         "probable_cases": probable,
         "suspected_cases": suspected if suspected is not None else 0,
+        "inconclusive_cases": inconclusive if inconclusive is not None else 0,
         "deaths": deaths,
         "status": "official_total",
         "source_tier": "official",
@@ -220,7 +222,7 @@ def parse_ecdc():
         "lng": -16.6291,
         "source_name": "ECDC live outbreak page",
         "source_url": ECDC_URL,
-        "comment": f"Auto-updated official ECDC data: total={total}, confirmed={confirmed}, probable={probable}, suspected={suspected if suspected is not None else 0}, deaths={deaths}.",
+        "comment": f"Auto-updated official ECDC data: total={total}, confirmed={confirmed}, probable={probable}, inconclusive={inconclusive if inconclusive is not None else 0}, suspected={suspected if suspected is not None else 0}, deaths={deaths}.",
         "include_in_totals": True,
         "auto_updated": True,
         "fallback": False
@@ -255,6 +257,7 @@ def parse_who():
         "confirmed_cases": confirmed,
         "probable_cases": probable,
         "suspected_cases": 0,
+        "inconclusive_cases": 0,
         "deaths": deaths,
         "status": "official_total",
         "source_tier": "official",
@@ -286,6 +289,7 @@ def cdc_verification_record():
         "confirmed_cases": None,
         "probable_cases": None,
         "suspected_cases": None,
+        "inconclusive_cases": None,
         "deaths": None,
         "status": "official_total",
         "source_tier": "official",
@@ -343,6 +347,7 @@ def main():
     print("confirmed:", ecdc.get("confirmed_cases"))
     print("probable:", ecdc.get("probable_cases"))
     print("suspected:", ecdc.get("suspected_cases"))
+    print("inconclusive:", ecdc.get("inconclusive_cases"))
     print("deaths:", ecdc.get("deaths"))
     print("fallback:", ecdc.get("fallback", False))
 
