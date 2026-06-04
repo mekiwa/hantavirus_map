@@ -55,10 +55,11 @@
     "lng": -16.6291,
     "source_name": "ECDC live outbreak page",
     "source_url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
-    "comment": "Auto-updated official ECDC data: total=13, confirmed=11, probable=2, inconclusive=0, suspected=0, deaths=3.",
+    "comment": "Auto-updated official ECDC data: total=13, confirmed=11, probable=2, inconclusive=0, suspected=0, deaths=3. | Reused cached ECDC record because live fetch failed.",
     "include_in_totals": true,
-    "auto_updated": true,
-    "fallback": false
+    "auto_updated": false,
+    "fallback": false,
+    "cached": true
   },
   {
     "id": "cdc-han00528-2026-verification",
